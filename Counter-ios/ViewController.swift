@@ -9,11 +9,25 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var counterLabel: UILabel!
+    @IBOutlet weak var increaseButton: UIButton!
+    
+    var count: Int = 0
+    
+    func updateCounterLabel() {
+        counterLabel.text = "Значение счётчика: " + String(count)
+    }
+    
+    @IBAction func increseByOne() {
+        count += 1
+        updateCounterLabel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        updateCounterLabel()
     }
-
 
 }
 
