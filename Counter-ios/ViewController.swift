@@ -10,19 +10,22 @@ import UIKit
 class ViewController: UIViewController {
 
     //Лейбл
-    @IBOutlet weak var counterLabel: UILabel!
+    @IBOutlet private weak var counterLabel: UILabel!
     
     //Кнопки
-    @IBOutlet weak var increaseButton: UIButton!
-    @IBOutlet weak var decreaseButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet private weak var increaseButton: UIButton!
+    @IBOutlet private weak var decreaseButton: UIButton!
+    @IBOutlet private weak var resetButton: UIButton!
     
     //Text view
-    @IBOutlet weak var historyView: UITextView!
+    @IBOutlet private weak var historyView: UITextView!
     
     //Счетчик
     private var count: Int = 0
 
+    //Форматирование даты
+    private let dateFormatter = DateFormatter()
+    
     //Перечисление действий кнопок
     private enum Actions {
         case increase
@@ -35,11 +38,9 @@ class ViewController: UIViewController {
     
     //функция возвращает текущую дату в красивом формате
     private func getCurrentDate() -> String {
-        let date = Date()
-        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d.MM.yyyy HH:mm:ss"
         
-        return dateFormatter.string(from: date)
+        return dateFormatter.string(from: Date())
     }
     
     //Функция обновляет text view в зависмости от действия
@@ -63,7 +64,7 @@ class ViewController: UIViewController {
         counterLabel.text = "Значение счётчика: " + String(count)
     }
     
-    @IBAction func increseByOne() {
+    @IBAction private func increseByOne() {
         count += 1
         action = .increase
         
@@ -71,7 +72,7 @@ class ViewController: UIViewController {
         updateTextView(buttonAction: action)
     }
     
-    @IBAction func decreaseByOne() {
+    @IBAction private func decreaseByOne() {
         if count > 0 {
             count -= 1
             action = .decrese
@@ -83,7 +84,7 @@ class ViewController: UIViewController {
         updateTextView(buttonAction: action)
     }
     
-    @IBAction func resetCounter() {
+    @IBAction private func resetCounter() {
         count = 0
         action = .reset
         
